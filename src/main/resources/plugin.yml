@@ -1,0 +1,15 @@
+name: AnarchyUtils
+version: '${project.version}'
+description: 'My first plugin :) This plugin adds custom Trap and Plast'
+main: my.toplib.anarchyutils.AnarchyUtils
+api-version: '1.16'
+load: POSTWORLD
+author: TOPLIB
+depend: [WorldEdit, WorldGuard]
+commands:
+  anarchy_utils:
+    description: AnarchyUtils commands.
+    usage: "Usage: /anarchy_utils <Trap-give|Plast-give> <Player>"
+  anarchy_utils-reload:
+    description: AnarchyUtils commands.
+    usage: "Usage: /anarchy_utils-reload"
