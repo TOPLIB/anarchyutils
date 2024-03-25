@@ -19,13 +19,19 @@ public class Events implements Listener {
 
         if (ItemManager.items.get("plast").isSimilar(e.getItem())) {
             if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                if(Buildings.cooldown.containsKey(e.getPlayer().getUniqueId())) return;
+                if (Buildings.cooldown.containsKey(e.getPlayer().getUniqueId())) {
+                    e.getPlayer().sendMessage(Utils.color(AnarchyUtils.instance.getConfig().getString("Messages.cooldown")));
+                    return;
+                }
                 e.setCancelled(true);
                 Buildings.createPlast(e.getPlayer());
             }
         } else if (ItemManager.items.get("trap").isSimilar(e.getItem())) {
             if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                if(Buildings.cooldown.containsKey(e.getPlayer().getUniqueId())) return;
+                if (Buildings.cooldown.containsKey(e.getPlayer().getUniqueId())) {
+                    e.getPlayer().sendMessage(Utils.color(AnarchyUtils.instance.getConfig().getString("Messages.cooldown")));
+                    return;
+                }
                 e.setCancelled(true);
                 Buildings.createBox(e.getPlayer());
             }

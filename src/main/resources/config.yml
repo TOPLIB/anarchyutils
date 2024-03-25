@@ -4,7 +4,7 @@ Items:
     DisplayName: "&eTrap" # Display name
     Material: NETHERITE_SCRAP # Material - List of material: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
     despawn_delay: 120
-    type: trap # In future
+    schemId: trap # Doesn't work
     Lore:
       - "§f"
       - "  §fRarity: §eLegendary  "
@@ -18,7 +18,7 @@ Items:
     DisplayName: "&bPlast"
     Material: DRIED_KELP
     despawn_delay: 120
-    type: plast
+    schemId: plast
     Lore:
       - "§f"
       - "  §fRarity: §bUltra-Rare  "
@@ -41,6 +41,7 @@ Messages:
   player_offline: "&cPlayer offline"
   no_permissions: "&cYou don't have permission to do this!"
   reload: "&aPlugin reloaded"
+  cooldown: "&cError please wait before using this item again."
   error: "&cERROR! Please contact with administrator."
   itemNotFounded: "&c%item% doesn't exists!"
 

@@ -2,6 +2,8 @@ package my.toplib.anarchyutils;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.flags.Flags;
+import com.sk89q.worldguard.protection.flags.RegionGroupFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
@@ -22,11 +24,6 @@ public class Buildings {
     public static boolean createPlast(Player player) {
 
         HashMap<Location, Material> blocks = new HashMap<>();
-
-        if (cooldown.containsKey(player.getUniqueId())) {
-            player.sendMessage(Utils.color(AnarchyUtils.instance.getConfig().getString("Messages.cooldown")));
-            return false;
-        }
 
         Location location1 = player.getLocation();
 
@@ -131,14 +128,6 @@ public class Buildings {
     public static boolean createBox(Player player) {
 
         HashMap<Location, Material> blocks = new HashMap<>();
-
-
-        if (cooldown.containsKey(player.getUniqueId())) {
-            player.sendMessage(Utils.color(AnarchyUtils.instance.getConfig().getString("Messages.cooldown")));
-            return false;
-        }
-
-
         Location location1 = player.getLocation();
         location1.setY(location1.getY() - 1);
 
@@ -473,8 +462,6 @@ public class Buildings {
         }
 
         String id = String.valueOf(UUID.randomUUID());
-        RegionContainer rgc = WorldGuard.getInstance().getPlatform().getRegionContainer();
-        RegionManager rgm = rgc.get(BukkitAdapter.adapt(player.getWorld()));
         player.sendMessage(Utils.color(AnarchyUtils.instance.getConfig().getString("Messages.player_setTrap")).replaceAll("%player%", player.getName()));
         AnarchyUtils.instance.getLogger().info(Utils.color(AnarchyUtils.instance.getConfig().getString("Messages.player_setTrapLog"))
                 .replaceAll("%player%", player.getName())
@@ -488,9 +475,6 @@ public class Buildings {
         }
         cooldown.put(player.getUniqueId(), 1);
 
-        ProtectedCuboidRegion region = new ProtectedCuboidRegion(id, BukkitAdapter.asBlockVector(point1), BukkitAdapter.asBlockVector(point2));
-        rgm.addRegion(region);
-
         new BukkitRunnable() {
 
             @Override
@@ -498,7 +482,6 @@ public class Buildings {
                 for (Map.Entry<Location, Material> entry : blocks.entrySet()) {
                     entry.getKey().getBlock().setType(entry.getValue());
                 }
-                rgm.removeRegion(id);
                 blocks.clear();
                 cooldown.remove(player.getUniqueId());
                 player.sendMessage(Utils.color(AnarchyUtils.instance.getConfig().getString("Messages.player_TrapDisable")).replaceAll("%player%", player.getName()));

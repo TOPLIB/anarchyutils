@@ -16,20 +16,22 @@ public final class AnarchyUtils extends JavaPlugin {
     public static AnarchyUtils instance;
     @Override
     public void onEnable() {
+        Bukkit.getLogger().info(" ");
+        Bukkit.getLogger().info("AnarchyUtils | --------------------------");
+        Bukkit.getLogger().info("AnarchyUtils | AnarchyUtils - Version: " + getDescription().getVersion());
+        Bukkit.getLogger().info("AnarchyUtils | --------------------------");
+        Bukkit.getLogger().info(" ");
         saveDefaultConfig();
         instance = this;
         ItemManager.init();
         getServer().getPluginManager().registerEvents(new Events(), this);
         getCommand("anarchy_utils").setExecutor(new MainCommands());
         getCommand("anarchy_utils").setTabCompleter(new MainTabComplete());
-        if(!getConfig().getBoolean("Settings.checkForUpdates")){
-            Bukkit.getLogger().warning("Update check is disabled in config.");
-        }
-        Bukkit.getLogger().info(Utils.color("&7[&6AnarchyUtils&7]&r Plugin has been successfully enabled!"));
+        Bukkit.getLogger().info("AnarchyUtils | Plugin has been successfully enabled!");
     }
 
     @Override
     public void onDisable() {
-        Bukkit.getLogger().info(Utils.color("&7[&6AnarchyUtils&7]&r Plugin has been successfully disabled!"));
+        Bukkit.getLogger().info(Utils.color("AnarchyUtils | Plugin has been successfully disabled!"));
     }
 }

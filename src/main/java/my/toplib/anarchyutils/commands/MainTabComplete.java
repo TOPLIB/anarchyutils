@@ -38,14 +38,13 @@ public class MainTabComplete implements TabCompleter {
                     );
                 }
             case 2:
-                if (args[1].equalsIgnoreCase("give")){
+                if (args[0].equalsIgnoreCase("give")){
                     return ItemManager.totalItems;
                 } else {
-                    break;
+                    return null;
                 }
             default:
-                break;
+                return null;
         }
-        return null;
     }
 }

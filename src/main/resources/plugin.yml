@@ -5,7 +5,7 @@ main: my.toplib.anarchyutils.AnarchyUtils
 api-version: '1.16'
 load: POSTWORLD
 author: TOPLIB
-depend: [WorldEdit, WorldGuard]
+depend: [WorldGuard]
 commands:
   anarchy_utils:
     description: AnarchyUtils commands.
