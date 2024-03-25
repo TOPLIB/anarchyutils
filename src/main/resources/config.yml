@@ -2,43 +2,31 @@
 Items:
   Trap:
     DisplayName: "&eTrap" # Display name
-    enabled: true # Enable this item?
     Material: NETHERITE_SCRAP # Material - List of material: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
     despawn_delay: 120
+    type: trap # In future
     Lore:
-      - "&f"
-      - "  &fRarity: §eLegendary  "
-      - "&f"
-      - "  &fDescription:"
-      - "   &fWhen using &7(RCB)&f"
-      - "   &fplaces obsidian box &63x3"
-      - "&f"
-    Craft:
-      enabled_craft: true # i create in future edit custom craft
-      # Then craft when enabled is
-      #BBB
-      #BSB Where B - Obsidian, S - Netherite ignot
-      #BBB
+      - "§f"
+      - "  §fRarity: §eLegendary  "
+      - "§f"
+      - "  §fDescription:"
+      - "   §fWhen using §7(RCB)§f"
+      - "   §fplaces obsidian box §63x3"
+      - "§f"
 
   Plast:
     DisplayName: "&bPlast"
-    enabled: true
     Material: DRIED_KELP
     despawn_delay: 120
+    type: plast
     Lore:
-    - "&f"
-    - "  &fRarity: §bUltra-Rare  "
-    - "&f"
-    - "  &fDescription:"
-    - "   &fWhen using &7(RCB)&f"
-    - "   &fplaces obsidian plast &63x3"
-    - "&f"
-  Craft:
-    enabled_craft: true # i create in future edit custom craft
-    # Then craft when enabled is
-    #BBB
-    #BSB Where B - Obsidian, S - Diamond
-    #BBB
+      - "§f"
+      - "  §fRarity: §bUltra-Rare  "
+      - "§f"
+      - "  §fDescription:"
+      - "   §fWhen using §7(RCB)§f"
+      - "   §fplaces obsidian plast §63x3"
+      - "§f"
 
 # Messages list
 
@@ -51,6 +39,12 @@ Messages:
   player_TrapDisable: "&fYour &6Trap&f has been disabled Player &6%player%"
   receive_item: "&fYou receive item: &6%item%"
   player_offline: "&cPlayer offline"
-  command_usage_help: "&fUsage: &6/%cmd% help&f for help"
   no_permissions: "&cYou don't have permission to do this!"
   reload: "&aPlugin reloaded"
+  error: "&cERROR! Please contact with administrator."
+  itemNotFounded: "&c%item% doesn't exists!"
+
+Settings:
+  checkForUpdates: true
+
+

@@ -9,7 +9,7 @@ depend: [WorldEdit, WorldGuard]
 commands:
   anarchy_utils:
     description: AnarchyUtils commands.
-    usage: "Usage: /anarchy_utils <Trap-give|Plast-give> <Player>"
-  anarchy_utils-reload:
-    description: AnarchyUtils commands.
-    usage: "Usage: /anarchy_utils-reload"
+    usage: "Usage: /anarchy_utils <give/reload/info> <Trap | Plast> <Player>"
+    aliases:
+      - au
+      - autils

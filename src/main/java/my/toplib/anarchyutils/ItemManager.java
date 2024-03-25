@@ -1,80 +1,115 @@
 package my.toplib.anarchyutils;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.bukkit.Bukkit;
+import my.toplib.anarchyutils.utils.Utils;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ItemManager {
-    public static ItemStack Trap;
-    public static ItemStack Plast;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-    public static void init() {
+public class ItemManager {
+    public static HashMap<String, ItemStack> items = new HashMap<>();
+
+    // Времено
+    public static ItemStack trap;
+    public static ItemStack plast;
+
+    public static List<String> totalItems = new ArrayList<>();
+
+    public static ItemStack getItem(String key){
+        if(items.containsKey(key)){
+            return items.get(key);
+        }
+        return null;
+    }
+    public static String addItem(String key, ItemStack item){
+        if(!items.containsKey(key)){
+            return "status-already_contains_key";
+        } else if(items.containsValue(item)){
+            return "status-already_contains_value";
+        }
+        items.put(key, item);
+        return "status-successfully";
+    }
+
+    public static void clearItems() { items.clear(); }
+
+    public static boolean containsItem(String key){ return items.containsKey(key); }
+
+    public static Boolean itemEquals(ItemStack item){
+        for (Map.Entry<String, ItemStack> entry : items.entrySet()) {
+            ItemStack storedItem = entry.getValue();
+            if (storedItem.isSimilar(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static void init(){
         createTrap();
         createPlast();
     }
 
+
+    public static void reload() {
+        clearItems();
+        createTrap();
+        createPlast();
+    }
+
+    public static String giveItemToPlayer(Player p, String item, int amount){
+        boolean hasFreeCell = false;
+        for(int i = 0; i < p.getInventory().getSize(); i++){
+            if(p.getInventory().getItem(i) == null){
+                hasFreeCell = true;
+                break;
+            }
+        }
+        if(hasFreeCell){
+            if(containsItem(item)){
+                p.getInventory().addItem(getItem(item));
+            } else {
+                return "unknown_item";
+            }
+        } else {
+            return "no_enough_space";
+        }
+        return "no_enough_space";
+    }
+
     private static void createTrap() {
-        if(AnarchyUtils.instance.getConfig().getBoolean("Items.Trap.enabled")){
-            Material cfgMaterial = Material.valueOf(AnarchyUtils.instance.getConfig().getString("Items.Plast.Material"));
-            ItemStack item = new ItemStack(Material.NETHERITE_SCRAP, 1);
-            ItemMeta meta = item.getItemMeta();
-            //meta.setDisplayName("§6Трапка");
-            meta.setDisplayName(AnarchyUtils.instance.getConfig().getString("Items.Trap.DisplayName")
-                    .replaceAll("&", "§"));
-            List<String> lore = new ArrayList();
-            int iterator = 0;
-            while(iterator < AnarchyUtils.instance.getConfig().getStringList("Items.Trap.Lore").size()){
-                lore.add(AnarchyUtils.instance.getConfig().getStringList("Items.Trap.Lore").get(iterator).replaceAll("&","§"));
-                iterator++;
-            }
-            meta.setLore(lore);
-            item.setItemMeta(meta);
-            Trap = item;
-            if (AnarchyUtils.instance.getConfig().getBoolean("Items.Trap.Craft.enabled_craft")) {
-                ShapedRecipe sr = new ShapedRecipe(NamespacedKey.minecraft("trap"), item);
-                sr.shape(new String[]{"BBB", "BSB", "BBB"});
-                sr.setIngredient('B', Material.OBSIDIAN);
-                sr.setIngredient('S', Material.NETHERITE_INGOT);
-                Bukkit.getServer().addRecipe(sr);
-            }
+        ItemStack item = new ItemStack( Material.valueOf(AnarchyUtils.instance.getConfig().getString("Items.Trap.Material")) , 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(AnarchyUtils.instance.getConfig().getString("Items.Trap.DisplayName")
+                .replaceAll("&", "§"));
+        ArrayList lore = new ArrayList();
+        for(int i = 0; i < AnarchyUtils.instance.getConfig().getStringList("Items.Trap.Lore").size(); i++){
+            lore.add(AnarchyUtils.instance.getConfig().getStringList("Items.Trap.Lore").get(i).replaceAll("&","§"));
         }
-        else{
-            AnarchyUtils.instance.getLogger().warning("Trap is disabled in config skipping");
-        }
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        items.put("trap".toLowerCase(), item);
+        totalItems.add("trap");
+        trap = item;
     }
 
     private static void createPlast() {
-        if(AnarchyUtils.instance.getConfig().getBoolean("Items.Plast.enabled")) {
-            Material cfgMaterial = Material.valueOf(AnarchyUtils.instance.getConfig().getString("Items.Plast.Material"));
-            ItemStack item = new ItemStack(cfgMaterial, 1);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(AnarchyUtils.instance.getConfig().getString("Items.Plast.DisplayName")
-                    .replaceAll("&", "§"));
-            List<String> lore = new ArrayList();
-            int iterator = 0;
-            while(iterator < AnarchyUtils.instance.getConfig().getStringList("Items.Plast.Lore").size()){
-                lore.add(AnarchyUtils.instance.getConfig().getStringList("Items.Plast.Lore")
-                        .get(iterator).replaceAll("&","§"));
-                iterator++;
-            }
-            meta.setLore(lore);
-            item.setItemMeta(meta);
-            Plast = item;
-            if (AnarchyUtils.instance.getConfig().getBoolean("Items.Plast.Craft.enabled_craft")) {
-                ShapedRecipe sre = new ShapedRecipe(NamespacedKey.minecraft("plast"), item);
-                sre.shape(new String[]{"BBB", "BSB", "BBB"});
-                sre.setIngredient('B', Material.OBSIDIAN);
-                sre.setIngredient('S', Material.DIAMOND);
-                Bukkit.getServer().addRecipe(sre);
-            }
+        ItemStack item = new ItemStack( Material.valueOf(AnarchyUtils.instance.getConfig().getString("Items.Plast.Material")) , 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(AnarchyUtils.instance.getConfig().getString("Items.Plast.DisplayName")
+                .replaceAll("&", "§"));
+        ArrayList lore = new ArrayList();
+        for(int i = 0; i < AnarchyUtils.instance.getConfig().getStringList("Items.Plast.Lore").size(); i++){
+            lore.add(AnarchyUtils.instance.getConfig().getStringList("Items.Plast.Lore").get(i).replaceAll("&","§"));
         }
-        else{
-            AnarchyUtils.instance.getLogger().warning("Plast is disabled in config skipping");
-        }
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        items.put("plast".toLowerCase(), item);
+        totalItems.add("plast");
+        plast = item;
     }
 }
