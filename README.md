@@ -1,6 +1,9 @@
 # Anarchy Utils
 
 Commands: 
-  /anarchy_utils <Trap-give / Plast-give> <Player> - Gives you Trap or Plast
-  
-  /anarchy_utils-reload - Reloads plugin
+  /au | /autis | /anarchy_utils
+
+TODO:
+  [-] Make .scm files to items module.
+  [-] Make onUse, onDisable
+  [-] Make normal API of plugin
