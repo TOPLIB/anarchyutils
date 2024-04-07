@@ -1,10 +1,10 @@
 package my.toplib.anarchyutils;
 
+import my.toplib.anarchyutils.configs.Messages;
 import my.toplib.anarchyutils.utils.Utils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -20,18 +20,17 @@ public class Events implements Listener {
         if (ItemManager.items.get("plast").isSimilar(e.getItem())) {
             if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 if (Buildings.cooldown.containsKey(e.getPlayer().getUniqueId())) {
-                    e.getPlayer().sendMessage(Utils.color(AnarchyUtils.instance.getConfig().getString("Messages.cooldown")));
+                    e.getPlayer().sendMessage(Utils.color(Messages.get().getString("cooldown")));
                     return;
                 }
                 e.setCancelled(true);
+                e.getPlayer().setCooldown(ItemManager.items.get("plast").getType(),
+                        AnarchyUtils.instance.getConfig().getInt(""));
                 Buildings.createPlast(e.getPlayer());
             }
         } else if (ItemManager.items.get("trap").isSimilar(e.getItem())) {
             if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                if (Buildings.cooldown.containsKey(e.getPlayer().getUniqueId())) {
-                    e.getPlayer().sendMessage(Utils.color(AnarchyUtils.instance.getConfig().getString("Messages.cooldown")));
-                    return;
-                }
+                if (Buildings.cooldown.containsKey(e.getPlayer().getUniqueId())) { e.getPlayer().sendMessage(Utils.color(Messages.get().getString("cooldown"))); return; }
                 e.setCancelled(true);
                 Buildings.createBox(e.getPlayer());
             }

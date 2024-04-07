@@ -442,10 +442,13 @@ public class api {
             }
         }.runTaskLater(AnarchyUtils.instance, timeBeforeClear);
     }
-    public void sendMessage(String message, Player p){
+    public void sendCMessage(String message, Player p){
         p.sendMessage(Utils.color(message));
     }
     public void broadcastMessage(@NotNull String message, @NotNull String prefix){
         AnarchyUtils.instance.getServer().broadcastMessage(Utils.color(prefix + message));
+    }
+    public scmParser getScmParser(){
+        return new scmParser();
     }
 }

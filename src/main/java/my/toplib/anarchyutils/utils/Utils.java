@@ -4,9 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import my.toplib.anarchyutils.AnarchyUtils;
 import org.bukkit.ChatColor;
-
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -22,7 +19,7 @@ public class Utils {
     }
 
     public static void checkUpdate(Player p) throws URISyntaxException, IOException, InterruptedException {
-        if(AnarchyUtils.instance.getConfig().getBoolean("Settings.checkForUpdates")){
+        if(AnarchyUtils.instance.getConfig().getBoolean("checkForUpdates")){
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI("https://api.github.com/repos/TOPLIB/anarchyutils/releases/latest"))
                     .GET()

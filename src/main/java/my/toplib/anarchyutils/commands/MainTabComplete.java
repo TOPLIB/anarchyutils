@@ -1,8 +1,6 @@
 package my.toplib.anarchyutils.commands;
 
-import my.toplib.anarchyutils.AnarchyUtils;
 import my.toplib.anarchyutils.ItemManager;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;

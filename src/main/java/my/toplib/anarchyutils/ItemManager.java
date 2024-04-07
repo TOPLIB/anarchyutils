@@ -1,11 +1,11 @@
 package my.toplib.anarchyutils;
 
-import my.toplib.anarchyutils.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +13,9 @@ import java.util.Map;
 
 public class ItemManager {
     public static HashMap<String, ItemStack> items = new HashMap<>();
-
-    // Времено
     public static ItemStack trap;
     public static ItemStack plast;
+    public static File scmSchematicsFolder;
 
     public static List<String> totalItems = new ArrayList<>();
 
@@ -49,6 +48,18 @@ public class ItemManager {
         }
         return false;
     }
+
+    public static void takeItem(int takeAmount, Player player){
+        for(Map.Entry<String, ItemStack> entry : items.entrySet()){
+            if(player.getInventory().getItemInMainHand().isSimilar(entry.getValue())){
+                if(player.getItemInHand().isSimilar(entry.getValue())){
+                    player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - takeAmount);
+                }
+            } else if(player.getInventory().getItemInOffHand().isSimilar(entry.getValue())){
+                player.getInventory().getItemInOffHand().setAmount(player.getInventory().getItemInOffHand().getAmount() - takeAmount);
+            }
+        }
+    }
     public static void init(){
         createTrap();
         createPlast();
@@ -62,23 +73,16 @@ public class ItemManager {
     }
 
     public static String giveItemToPlayer(Player p, String item, int amount){
-        boolean hasFreeCell = false;
-        for(int i = 0; i < p.getInventory().getSize(); i++){
-            if(p.getInventory().getItem(i) == null){
-                hasFreeCell = true;
-                break;
+        for (int i = 0; i < p.getInventory().getSize(); i++) {
+            ItemStack slotItem = p.getInventory().getItem(i);
+            if (slotItem == null) {
+                ItemStack newItem = getItem(item);
+                newItem.setAmount(amount);
+                p.getInventory().addItem(newItem);
+                return "success";
             }
-        }
-        if(hasFreeCell){
-            if(containsItem(item)){
-                p.getInventory().addItem(getItem(item));
-            } else {
-                return "unknown_item";
-            }
-        } else {
-            return "no_enough_space";
-        }
-        return "no_enough_space";
+        };
+        return "error";
     }
 
     private static void createTrap() {

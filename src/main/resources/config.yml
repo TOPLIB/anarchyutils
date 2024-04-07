@@ -4,7 +4,6 @@ Items:
     DisplayName: "&eTrap" # Display name
     Material: NETHERITE_SCRAP # Material - List of material: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
     despawn_delay: 120
-    schemId: trap # Doesn't work
     Lore:
       - "§f"
       - "  §fRarity: §eLegendary  "
@@ -13,12 +12,22 @@ Items:
       - "   §fWhen using §7(RCB)§f"
       - "   §fplaces obsidian box §63x3"
       - "§f"
+    onUse:
+      - "[PLACESCHEM] trap1"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] trap2"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] trap3"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] trap4"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] trap5"
+      - "[WAIT] 0.1"
 
   Plast:
     DisplayName: "&bPlast"
     Material: DRIED_KELP
     despawn_delay: 120
-    schemId: plast
     Lore:
       - "§f"
       - "  §fRarity: §bUltra-Rare  "
@@ -28,24 +37,16 @@ Items:
       - "   §fplaces obsidian plast §63x3"
       - "§f"
 
-# Messages list
-
-Messages:
-  player_setPlast: "&fYou &6%player% &fplaced the &6Plast&f!" # Supports placeholder %player%
-  player_setPlastLog: "&fPlayer &6%player% &fplaced the &6Plast&f on Location: &6X: %location_x% Y: %location_y% Z: %location_z%" # Supports placeholders %player%, %location_x%, %location_y%, %location_z%
-  player_plastDisable: "&fYour &6Plast&f has been disabled Player &6%player%"
-  player_setTrap: "&fYou &6%player% &fplaced the &6Trap&f!" # Supports placeholder %player%
-  player_setTrapLog: "&fPlayer &6%player% &fplaced the &6Trap&f on Location: &6X: %location_x% Y: %location_y% Z: %location_z%" # Supports placeholders %player%, %location_x%, %location_y%, %location_z%
-  player_TrapDisable: "&fYour &6Trap&f has been disabled Player &6%player%"
-  receive_item: "&fYou receive item: &6%item%"
-  player_offline: "&cPlayer offline"
-  no_permissions: "&cYou don't have permission to do this!"
-  reload: "&aPlugin reloaded"
-  cooldown: "&cError please wait before using this item again."
-  error: "&cERROR! Please contact with administrator."
-  itemNotFounded: "&c%item% doesn't exists!"
-
 Settings:
   checkForUpdates: true
+
+Shematics:
+  trap:
+    file: "building/trap.scm"
+  plast:
+    file: "building/trap.scm"
+
+DisabledRegions:
+  - spawn
 
 
