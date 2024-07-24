@@ -3,7 +3,6 @@ Items:
   Trap:
     DisplayName: "&eTrap" # Display name
     Material: NETHERITE_SCRAP # Material - List of material: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
-    despawn_delay: 120
     Lore:
       - "§f"
       - "  §fRarity: §eLegendary  "
@@ -13,21 +12,20 @@ Items:
       - "   §fplaces obsidian box §63x3"
       - "§f"
     onUse:
-      - "[PLACESCHEM] trap1"
+      - "[PLACESCHEM] trap1;120" # onUse condition
       - "[WAIT] 0.1"
-      - "[PLACESCHEM] trap2"
+      - "[PLACESCHEM] trap2;120"
       - "[WAIT] 0.1"
-      - "[PLACESCHEM] trap3"
+      - "[PLACESCHEM] trap3;120"
       - "[WAIT] 0.1"
-      - "[PLACESCHEM] trap4"
+      - "[PLACESCHEM] trap4;120"
       - "[WAIT] 0.1"
-      - "[PLACESCHEM] trap5"
+      - "[PLACESCHEM] trap5;120"
       - "[WAIT] 0.1"
 
   Plast:
     DisplayName: "&bPlast"
     Material: DRIED_KELP
-    despawn_delay: 120
     Lore:
       - "§f"
       - "  §fRarity: §bUltra-Rare  "
@@ -36,15 +34,26 @@ Items:
       - "   §fWhen using §7(RCB)§f"
       - "   §fplaces obsidian plast §63x3"
       - "§f"
+    onUse:
+      - "[PLACESCHEM] plast1;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] plast2;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] plast3;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] plast4;120"
+      - "[WAIT] 0.1"
+      - "[PLACESCHEM] plast5;120"
+      - "[WAIT] 0.1"
 
 Settings:
   checkForUpdates: true
 
-Shematics:
+Schematics:
   trap:
     file: "building/trap.scm"
   plast:
-    file: "building/trap.scm"
+    file: "building/plast.scm"
 
 DisabledRegions:
   - spawn
