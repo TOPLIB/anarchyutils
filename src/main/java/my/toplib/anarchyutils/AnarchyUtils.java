@@ -12,7 +12,8 @@ public final class AnarchyUtils extends JavaPlugin {
 
 
     public static AnarchyUtils instance;
-    private ConfigLoader messagesConfig;
+    public static ConfigLoader messagesConfig;
+    public static ConfigLoader itemsConfig;
 
 
     @Override
@@ -20,7 +21,11 @@ public final class AnarchyUtils extends JavaPlugin {
 
         instance = this;
         saveConfigs();
+
         saveDefaultConfig();
+        messagesConfig.saveDefault();
+        itemsConfig.saveDefault();
+
         ItemManager.init();
 
         Bukkit.getLogger().info(" ");
@@ -46,6 +51,18 @@ public final class AnarchyUtils extends JavaPlugin {
     private void saveConfigs(){
 
         messagesConfig = ConfigLoader.of(this, "messages.yml");
+        itemsConfig = ConfigLoader.of(this, "items.yml");
 
+    }
+
+
+    public static void reloadConfigs(){
+        instance.saveDefaultConfig();
+        messagesConfig.saveDefault();
+        itemsConfig.saveDefault();
+
+        instance.reloadConfig();
+        messagesConfig.reloadConfig();
+        itemsConfig.reloadConfig();
     }
 }

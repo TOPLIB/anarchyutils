@@ -1,6 +1,3 @@
-# Do not add items to the ITEMS section, the plugin will not see them, I will add this in the future!
-
-
 Settings:
   checkForUpdates: true
 

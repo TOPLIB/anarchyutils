@@ -3,6 +3,7 @@ system:
   no_permissions: "&cYou don't have permission to do this!"
   reload: "&aPlugin reloaded"
   error: "&cERROR! Please contact with administrator."
+  root_command_usage: "&cUsage: "
 
 
 modules:
